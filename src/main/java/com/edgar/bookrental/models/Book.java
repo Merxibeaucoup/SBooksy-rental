@@ -2,6 +2,8 @@ package com.edgar.bookrental.models;
 
 
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -36,6 +38,10 @@ public class Book {
 	@Positive
 	@NotNull
 	private Integer pageNumber;
+	
+	@Positive
+	@NotNull
+	private BigDecimal price;
 	
 	@Column(name="been_borrowed",nullable = true)
 	private Boolean borrowed;

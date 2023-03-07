@@ -5,11 +5,15 @@ import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.edgar.bookrental.models.user.User;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -30,7 +34,7 @@ public class Rental {
 	private Long id;
 
 	@NotBlank
-	private String book_title;
+	private String bookTitle;
 
 	@CreationTimestamp
 	@Column(name = "rent_date")
@@ -46,8 +50,8 @@ public class Rental {
 	@PositiveOrZero
 	private BigDecimal penalty;
 
-//	@ManyToOne
-//	@JoinColumn(name = "user_id", nullable = false)
-//	private User user;
+	@ManyToOne
+	@JoinColumn(name = "user_id", nullable = false)
+	private User user;
 
 }

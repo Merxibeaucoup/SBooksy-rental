@@ -1,5 +1,6 @@
 package com.edgar.bookrental.services;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +22,9 @@ public class BookService {
 	public Book newBook(Book book) {
 		if (!isExists(book.getTitle())) {
 			
+			
+			/* flat rate for every rental less than 30 days **/
+			book.setPrice(new BigDecimal("10.00"));
 			book.setBorrowed(false);
 
 			return bookRepository.save(book);
