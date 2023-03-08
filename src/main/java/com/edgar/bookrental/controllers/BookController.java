@@ -29,10 +29,11 @@ public class BookController {
 	
 	
 	@Autowired
-	private BookRepository bookRepository;
-	
+	private BookRepository bookRepository;	
 	
 
+	/*create book**/
+	
 	@PostMapping("/new")
 	public ResponseEntity<Book> create(@Valid @RequestBody Book book) {
 		return ResponseEntity.ok(bookServices.newBook(book));
@@ -57,13 +58,14 @@ public class BookController {
 		
 	}
 	
-	@PutMapping("/{id}")
+	
+	@PutMapping("/book/{id}")
 	public ResponseEntity<Book> updateById(@PathVariable Long id ,@RequestBody Book book){
 		return ResponseEntity.ok(bookServices.updateBook(id, book));
 	}
 	
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/book/{id}")
 	public ResponseEntity<?> deleteById(@PathVariable Long id){
 		return bookRepository.findById(id)
 		           .map(record -> {
@@ -71,7 +73,6 @@ public class BookController {
 		               return ResponseEntity.ok().build();
 		           }).orElse(ResponseEntity.notFound().build());
 	}
-	
 	
 
 
