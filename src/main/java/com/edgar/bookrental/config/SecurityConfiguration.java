@@ -23,6 +23,19 @@ public class SecurityConfiguration {
 	private final LogoutHandler logoutHandler;
 	
 	
+	/**
+	 * 
+	 * 
+	 * Use for reference
+	 * 
+	 * .requestMatchers("/content/**").hasRole("USER")
+    .requestMatchers("/admin/**").hasRole("SUPERADMIN")
+    .requestMatchers("/**").permitAll()
+	 * 
+	 * 
+	 * **/
+	
+	
 
 	
 

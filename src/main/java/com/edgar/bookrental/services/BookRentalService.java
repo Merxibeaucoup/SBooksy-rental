@@ -2,6 +2,7 @@ package com.edgar.bookrental.services;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +30,12 @@ public class BookRentalService {
 
 	private final int RENT_PERIOD = 30;
 
-	private final BigDecimal LATE_RETURN_FEE = new BigDecimal("5.00");
+	private final BigDecimal LATE_RETURN_FEE = new BigDecimal("7.00");
 
 	/* Rent a book **/
 	public Rental rent(Rental rental, Book book_title, User user) {
 
-		LocalDateTime rentdate_now = LocalDateTime.now();
+		LocalDateTime rent_date_now = LocalDateTime.now();
 
 		if (isExists(book_title.getTitle())) {
 
@@ -45,10 +46,10 @@ public class BookRentalService {
 
 			book_title.setBorrowed(true);
 			rental.setUser(user);
-			rental.setRentDate(rentdate_now);
-			rental.setReturnDate(rentdate_now.plusDays(RENT_PERIOD));
+			rental.setRentDate(rent_date_now);
+			rental.setReturnDate(rent_date_now.plusDays(RENT_PERIOD));
 			rental.setReturned(false);
-			rental.setPenalty(new BigDecimal("0.00"));
+			rental.setTotal(new BigDecimal("0.00"));
 
 			return rentalRepository.save(rental);
 
@@ -74,27 +75,30 @@ public class BookRentalService {
 
 			rental.setReturned(true);
 
+			/* if return is late , user gets charged a late fee **/
+
 			LocalDateTime today = LocalDateTime.now();
 
-			rental.setReturnDate((today));
+			long days_late = ChronoUnit.DAYS.between(book_in_System.getReturnDate(), today);
 
-			BigDecimal penalty = new BigDecimal("0.00"); // --> will use later  , change penalty field in Rental to total
-
-			
-			
-			/* if return is late , user gets charged a late fee **/
-			
-			
 			if (today.isAfter(book_in_System.getReturnDate())) {
 
-				rental.setPenalty(book.getPrice().add(LATE_RETURN_FEE));
-			} else {
-				rental.setPenalty(book.getPrice());
+				/* if days late is more than 15 days renter pays full price of the book **/
+				if (days_late > 15) {
+					rental.setTotal(book.getBookPrice());
+				}
+
+				else
+					rental.setTotal(book.getRentPrice().add(LATE_RETURN_FEE));
+			} else
+
+			{
+				rental.setTotal(book.getRentPrice());
 
 			}
 
+			rental.setReturnDate((today));
 			bookRepository.save(book);
-
 			rentalRepository.save(rental);
 
 		}

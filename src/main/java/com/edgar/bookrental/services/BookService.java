@@ -20,11 +20,9 @@ public class BookService {
 
 	/* create book */
 	public Book newBook(Book book) {
-		if (!isExists(book.getTitle())) {
-			
-			
+		if (!isExists(book.getTitle())) {			
 			/* flat rate for every rental less than 30 days **/
-			book.setPrice(new BigDecimal("10.00"));
+			book.setRentPrice(new BigDecimal("10.00"));
 			book.setBorrowed(false);
 
 			return bookRepository.save(book);
@@ -61,8 +59,6 @@ public class BookService {
 	public Book updateBook(Long id, Book book) {
 
 		if (isExists(id)) {
-			
-
 			return bookRepository.save(book);
 
 		}

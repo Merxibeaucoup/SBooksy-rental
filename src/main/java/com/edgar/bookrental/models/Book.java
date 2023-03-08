@@ -41,7 +41,11 @@ public class Book {
 	
 	@Positive
 	@NotNull
-	private BigDecimal price;
+	private BigDecimal rentPrice;
+	
+	@Positive
+	@NotNull
+	private BigDecimal bookPrice;
 	
 	@Column(name="been_borrowed",nullable = true)
 	private Boolean borrowed;

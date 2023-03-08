@@ -48,7 +48,7 @@ public class Rental {
 	
 	
 	@PositiveOrZero
-	private BigDecimal penalty;
+	private BigDecimal total;
 
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)
