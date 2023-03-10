@@ -24,8 +24,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	
 	@Transactional
     @Modifying(clearAutomatically = true)
-    @Query("update User user set user.role = :userRole where user.id = :id")
-    void assignRole(@Param("id") long id, @Param("userRole") Role userRole);
+    @Query("update User user set user.role = :role where user.id = :id")
+    void assignRole(@Param("id") long id, @Param("role") Role role);
 	
 	
 
