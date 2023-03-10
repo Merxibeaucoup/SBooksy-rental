@@ -48,9 +48,17 @@ public class AuthenticationService {
 	    var jwtToken = jwtService.generateToken(user);
 	   
 	    saveUserToken(savedUser, jwtToken);
+	    
+	    
+	    /** added response below email , firstname, id to access in frontend
+	     * if any issues , just remove those and in AUthResponse class too 
+	     * **/
 		
 	    return AuthenticationResponse.builder()
 	            .token(jwtToken)
+	            .email(user.getEmail())
+	            .firstname(user.getFirstname())
+	            .id(user.getId())
 	            .build();
 	}
 	
@@ -75,7 +83,10 @@ public class AuthenticationService {
 			    revokeAllUserTokens(user);
 			    saveUserToken(user, jwtToken);
 			    return AuthenticationResponse.builder()
-			        .token(jwtToken)
+			    		 .token(jwtToken)
+				         .email(user.getEmail())
+				         .firstname(user.getFirstname())
+				         .id(user.getId())
 			        .build();
 		
 		

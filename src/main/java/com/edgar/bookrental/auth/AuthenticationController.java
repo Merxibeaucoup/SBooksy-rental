@@ -2,12 +2,15 @@ package com.edgar.bookrental.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.edgar.bookrental.models.user.User;
 
 
 
@@ -26,13 +29,13 @@ public class AuthenticationController {
 	
 	@PostMapping("/register")
 	  public ResponseEntity<AuthenticationResponse> register(
-	      @RequestBody RegisterRequest request
+	      @RequestBody RegisterRequest request,  @AuthenticationPrincipal User user
 	  ) {
 	    return ResponseEntity.ok(service.register(request));
 	  }
 	  @PostMapping("/authenticate")
 	  public ResponseEntity<AuthenticationResponse> authenticate(
-	      @RequestBody AuthenticationRequest request
+	      @RequestBody AuthenticationRequest request , @AuthenticationPrincipal User user
 	  ) {
 	    return ResponseEntity.ok(service.authenticate(request));
 	  }
