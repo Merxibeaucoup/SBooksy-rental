@@ -1,8 +1,9 @@
 package com.edgar.bookrental.models.user;
 
-import lombok.Getter;
+import java.util.HashMap;
 
-@Getter
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 public enum Role {
 	USER("user"), ADMIN("admin");
 
@@ -12,26 +13,31 @@ public enum Role {
 		this.roleText = roleText;
 	}
 
+	@JsonCreator
 	public String getRoleText() {
 		return this.roleText;
 	}
 
+	
+
+private static HashMap<String, Role> roles;
+
+
+static {
+    roles = new HashMap<>();
+    for (Role r : Role.values()) {
+        roles.put(r.toString(), r);
+    }
+}
+
+
+@JsonCreator
+public static Role parse(String s) {
+    return roles.get(s);
+}
+
+
 
 }
 
-//
-//private static HashMap<String, Role> roles;
-//static {
-//    roles = new HashMap<>();
-//    for (Role r : Role.values()) {
-//        roles.put(r.toString(), r);
-//    }
-//}
-//
-//
-//@JsonCreator
-//public static Role parse(String s) {
-//    return roles.get(s);
-//}
-//
 

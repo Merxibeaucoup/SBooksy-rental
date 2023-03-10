@@ -21,7 +21,6 @@ public class UserService {
 
 			User user = repository.findById(id)
 					.orElseThrow(() -> new UserDoesntExistException("user doesnt exist id ::" + id));
-
 			if (user.getRole() == Role.ADMIN) {
 				throw new UserIsAdminException(" user is an admin , their roles cant be changed");
 			}			

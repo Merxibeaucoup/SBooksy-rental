@@ -3,6 +3,7 @@ package com.edgar.bookrental.services;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,13 @@ public class BookRentalService {
 	private final int RENT_PERIOD = 30;
 
 	private final BigDecimal LATE_RETURN_FEE = new BigDecimal("7.00");
+	
+	
+	
+	/** find all rentals **/
+	public List<Rental> getAllRentals(){
+		return rentalRepository.findAll();
+	}
 
 	/* Rent a book **/
 	public Rental rent(Rental rental, Book book_title, User user) {
@@ -70,9 +78,7 @@ public class BookRentalService {
 		if (isExistsRented(request.getBookTitle())) {
 
 			Book book = bookRepository.findByTitle(request.getBookTitle()).get();
-
 			book.setBorrowed(false);
-
 			rental.setReturned(true);
 
 			/* if return is late , user gets charged a late fee **/
