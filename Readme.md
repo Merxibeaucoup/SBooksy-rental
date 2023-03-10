@@ -2,6 +2,10 @@
 
 This APP mimics A book rental App similar to **Amazon Textbook Rentals**
 
+## React Frontend coming soon
+
+coming soon
+
 ## USER
 
 User can --->
@@ -9,7 +13,7 @@ User can --->
 1. Register, login , logout
 2. View all books
 3. View all books by author
-4. View book title
+4. View book by title
 5. rent a text book.
 
 ## ADMIN
@@ -20,7 +24,7 @@ Only Admin can -->
 2. Confirm book returned by customer
 3. View all books
 4. View all books by author
-5. View book title
+5. View book by title
 
 ## Technologies
 
