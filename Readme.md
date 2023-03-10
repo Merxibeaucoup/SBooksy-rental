@@ -2,10 +2,6 @@
 
 This APP mimics A book rental App similar to **Amazon Textbook Rentals**
 
-## React Frontend coming soon
-
-coming soon
-
 ## USER
 
 User can --->
@@ -34,3 +30,13 @@ Only Admin can -->
 - PostgreSQL
 - Lombok
 - JUnit, Mockito
+
+## React Frontend coming soon
+
+coming soon .....
+
+- HTML
+- CSS
+- SASS
+- JAVASCRIPT
+- REACT
